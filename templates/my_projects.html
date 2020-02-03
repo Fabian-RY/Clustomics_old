@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+   <body>
+ 	<h1> My projects </h1>
+ 	{{ projects }}
+	<table border=1>
+      {% for project in projects %}
+	<tr>
+
+               <th> {{ project['project_name'] }} </th>
+               <td> {{ project['id_group'] }} </td>
+     
+        </tr>        
+
+      {% endfor %}
+   </body>
+</html>
