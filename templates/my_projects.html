@@ -1,7 +1,11 @@
 <!doctype html>
 <html>
    <body>
+	   
  	<h1> My projects </h1>
+	   <form action="/{{user}}/new_project">
+    	<input type="submit" value="Create new project" />
+		</form>
  	{{ projects }}
 	<table border=1>
       {% for project in projects %}
@@ -9,7 +13,9 @@
 
                <th> {{ project['project_name'] }} </th>
                <td> {{ project['id_group'] }} </td>
-     
+	<td><form action="/{{user}}/{{project['project_name']}}">
+    	<input type="submit" value="Go to the project" />
+		</form></td>     
         </tr>        
 
       {% endfor %}
