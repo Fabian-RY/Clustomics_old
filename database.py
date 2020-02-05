@@ -34,31 +34,45 @@ def create_new_user():
 
 def get_user_info(user):
     with connection.cursor() as cursor:
-        sql = 'SELECT email FROM user_info where username=%s'
+        sql = 'SELECT email FROM user_info where username=%s;'
         cursor.execute(sql, (user, ))
         result = tuple(cursor)
     return result
 
 
 def get_groups_of_user(user):
+    sql = "SELECT group_name FROM member_group WHERE username=%s;"
+    with connection.cursor() as cursor:
+        cursor.execute(sql, (user, ))
+        result = tuple(cursor)
+    return result
     pass
 
 def get_group_info():
     pass
 
 def save_result():
+    with connection.cursor() as cursor:
+        sql = 'SELECT email FROM user_info where username=%s;'
+        cursor.execute(sql, (user, ))
+        result = tuple(cursor)
+    return result
     pass
 
-def get_user_result(date, user):
+def get_user_result(datetime, user):
+    sql = "SELECT * FROM project_result where username=%s;"
+    with connection.cursor() as cursor:
+        cursor.execute(sql, (user, ))
+        result = tuple(cursor)
+    return result
     pass
 
 def get_projects_from_user(user):
     with connection.cursor() as cursor:
-        sql = 'SELECT * FROM projects WHERE user=%s'
+        sql = 'SELECT * FROM projects WHERE user=%s;'
         cursor.execute(sql, (user, ))
         result = cursor.fetchall()
-        print(type(result))
-    return result
+    return tuple(result)
 
 def delete_project():
     pass
