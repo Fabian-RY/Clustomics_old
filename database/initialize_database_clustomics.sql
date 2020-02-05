@@ -33,5 +33,6 @@ CREATE TABLE project_result(
     date_time CHAR(20),
     algo_rithm INT,
     distance VARCHAR(25),
-    linkage VARCHAR(25)
+    linkage VARCHAR(25),
+    user VARCHAR(15)
 	);
