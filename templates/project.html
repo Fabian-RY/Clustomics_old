@@ -1,25 +1,39 @@
-<!DOCTYPE html>
-  <html>
-    <head>
-      <title> Clustomics | Nombre del proyecto </title>
-      <meta charset="UTF-8">
-      <meta name="description" content="This field contains information about your page. It is usually around two sentences long.">.
-      <meta name="author" content="Conor Sheils">
-    </head>
-    <body>
-      <h1> Header con algo </h1>
-      <table>
-        <tr>
-        <td>Row 1 - Column 1</td>
-        <td>Row 1 - Column 2 </td>
-        </tr>
-        <tr>
-        <td>Row 2 - Column 1</td>
-        <td>Row 2 - Column 2</td>
-        </tr>
-      </table>
-      <p> Descripcion del proyecto </p>
-      <a href="Link a los detalles de un proyecto"> Nombre del proyecto</a>
-    </body>
-  </html>
-     
+doctype html>
+<html>
+   <body>
+	   
+ 	<h1> {{project['project_name']}} </h1>
+<h2> New run </h2>
+<form action={{ url_for("project", user=username, project=project['project_name'])}}>
+ Select algorithm <select name="algorithm">
+    <option value="algorithm_1">Algorithm_1</option>
+    <option value="algorithm_2">Algorithm_2</option>
+  </select>
+  <br><br>
+<form action={{ url_for("project", user=username, project=project['project_name'])}}>
+  Select number of groups: <input type="number" name="quantity" min="1" max="10">
+</form>
+<form action={{ url_for("project", user=username, project=project['project_name'])}}>
+  Select linkage: <input type="number" name="quantity" min="1" max="10">
+</form>
+<form action={{ url_for("project", user=username, project=project['project_name'])}}>
+  Select distance: <input type="number" name="quantity" min="1" max="10">
+</form>
+  <input type="submit">
+</form>
+<h2> Previous runs</h2>
+	<table border=1>
+      {% for run in results %}
+	<tr>	
+               <th> {{ run['project_date'] }} </th>
+               <td> {{ run['validation_result'] }} </td>
+		<td> {{ run['user'] }} </td>
+		<td> {{ run['algorithm'] }} </td>
+		<td> {{ run['linkage'] }} </td>
+		<td> {{ run['distance'] }} </td>
+		<td> {{ run['groups'] }} </td>   
+        </tr>        
+
+      {% endfor %}
+   </body>
+</html>
