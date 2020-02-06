@@ -4,7 +4,9 @@
 	   
  	<h1> {{project['project_name']}} </h1>
 <h2> New run </h2>
-<form>
+<form action = {{url_for('new_run')}} method = "POST" enctype = "multipart/form-data">
+         <input type = "file" name = "file" />
+         <input type = "submit"/>
      Select algorithm 
      <select name="algorithm">
         <option value="algorithm_1">K Means</option>
