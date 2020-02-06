@@ -1,25 +1,30 @@
-doctype html>
+<doctype html>
 <html>
    <body>
 	   
  	<h1> {{project['project_name']}} </h1>
 <h2> New run </h2>
-<form action={{ url_for("project", user=username, project=project['project_name'])}}>
- Select algorithm <select name="algorithm">
-    <option value="algorithm_1">Algorithm_1</option>
-    <option value="algorithm_2">Algorithm_2</option>
-  </select>
-  <br><br>
-<form action={{ url_for("project", user=username, project=project['project_name'])}}>
-  Select number of groups: <input type="number" name="quantity" min="1" max="10">
-</form>
-<form action={{ url_for("project", user=username, project=project['project_name'])}}>
-  Select linkage: <input type="number" name="quantity" min="1" max="10">
-</form>
-<form action={{ url_for("project", user=username, project=project['project_name'])}}>
-  Select distance: <input type="number" name="quantity" min="1" max="10">
-</form>
-  <input type="submit">
+<form>
+     Select algorithm 
+     <select name="algorithm">
+        <option value="algorithm_1">K Means</option>
+        <option value="algorithm_2">Hierarchical clustering</option>
+     </select>
+      <br />
+      Select number of groups: <input type="number" name="quantity" min="1">
+      <br />
+      Select linkage: 
+      <select>
+          <option value="ward"> Ward</option>
+          <option value="single"> Single</option>
+      </select>
+      <br />
+      Select distance: 
+      <select>
+          <option value="euclidean">Euclidean</option>
+      </select>
+      <br />
+      <input type="submit"></p>
 </form>
 <h2> Previous runs</h2>
 	<table border=1>
