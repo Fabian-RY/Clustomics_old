@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title> RunID | {{project_name}} </title>
+      <meta charset="UTF-8">
+      <meta name="description" content="">
+      <meta name="author" content="Conor Sheils">
+    </head>
+    <body>
+      <nav>
+        <a href="">Home</a> |
+        <a href="">MyProjects</a> |
+        <a href="">This Project</a>
+      </nav>
+      <h1> Run ID </h1> {{date}}
+      <p> {{user_name}} </p>
+      <p> {{group_name}} </p>
+      <p> {{algorithm}} </p>
+      <p> {{validation_parameter}} </p>
+      <p> {{number_of_groups}} </p>
+      <p> {{distance}} </p>
+      <p> {{linkage}} </p>
+      <table border=1>
+        {% for datapoint in data %}
+        <tr>
+          <th> Datapoint ID/position </th>
+          <th> {{ run['validation_result'] }} </th>
+      		<td> {{ run['user'] }} </td>
+      		<td> {{ run['algorithm'] }} </td>
+        </tr>
+
+        {% endfor %}
+      </table>
+      <img src={{img_route}} alt ="Results plot">
+    </body>
+  </html>
