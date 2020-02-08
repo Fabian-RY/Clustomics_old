@@ -50,12 +50,18 @@ def new_project(user, name, group):
 
 
 @app.route('/<user>/<project>/results', methods=['POST','GET'])
-def run_results(user, name, group):
-    database.return_results()
+def run_results(id_project, datetime, user):
+    run = database.get_run_reults(id_project, datetime, user)
+    run=run[0]
     return flask.render_template('run.html', 
-                                     project=project_[0], 
-                                     results=results,
-                                     username=user)
+                                     project_name=run['project_name'], 
+                                     algorithm=run['algo_rithm'],
+                                     user_name=run['user'],
+                                     group_name=run['group_name'],
+                                     validation_parameter=run['validation_result'],
+                                     number_of_groups=run['groups'],
+                                     distance=run['distance'],
+                                     linkage=run['linkage'])
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
