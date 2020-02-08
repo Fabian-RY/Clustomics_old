@@ -98,6 +98,11 @@ def get_projects_from_user(user):
         cursor.execute(sql, (user, *member_of, ))
         result = cursor.fetchall()
     return tuple(result)
+def get_run_results(id_project, datetime, user):
+    sql = 'SELECT * FROM project_result WHERE id_project=%s AND date_time=%s AND user=%s'
+    with connection.cursor() as cursor:
+        cursor.execute(sql, (id_project,datetime,user ))
+        result = tuple(cursor)
 
 def delete_project():
     pass
