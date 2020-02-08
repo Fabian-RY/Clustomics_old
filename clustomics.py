@@ -48,6 +48,15 @@ def new_project(user, name, group):
     database.create_new_project(user, name, group)
     return flask.url_for('projects', user=user)
 
+
+@app.route('/<user>/<project>/results', methods=['POST','GET'])
+def run_results(user, name, group):
+    database.return_results()
+    return flask.render_template('run.html', 
+                                     project=project_[0], 
+                                     results=results,
+                                     username=user)
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     return flask.render_template('template_login.html')
