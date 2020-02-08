@@ -32,6 +32,7 @@ CREATE TABLE project_result(
     validation_result FLOAT,
     date_time CHAR(20),
     algo_rithm INT,
+    groups INT, 
     distance VARCHAR(25),
     linkage VARCHAR(25),
     user VARCHAR(15),
