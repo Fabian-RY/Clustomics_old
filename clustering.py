@@ -16,6 +16,9 @@ def cluster(array, method, num_clusters, distance_type, linkage_type):
     validation = silhouette_score(algorithm.labels_, array, metric=distance_type)
     return (algorithm.labels_, validation)
     
+
 def plot(array, labels):
-    
-    pass
+    if len(array[0]) != 2:
+        return None
+    with matplotlib.pyplott as plt:
+        pass

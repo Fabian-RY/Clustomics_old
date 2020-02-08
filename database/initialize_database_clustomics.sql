@@ -20,7 +20,7 @@ CREATE TABLE member_group (
 	);
     
 CREATE TABLE projects(
-	id_project INT PRIMARY KEY AUTO_INCREMENT,
+    id_project INT PRIMARY KEY AUTO_INCREMENT,
     id_group VARCHAR(40),
     user VARCHAR(15),
     project_name VARCHAR(50),
@@ -28,11 +28,12 @@ CREATE TABLE projects(
 	);
     
 CREATE TABLE project_result(
-	id_project INT,
+    project_name VARCHAR(50),
     validation_result FLOAT,
     date_time CHAR(20),
     algo_rithm INT,
     distance VARCHAR(25),
     linkage VARCHAR(25),
-    user VARCHAR(15)
+    user VARCHAR(15),
+    path VARCHAR(15)
 	);

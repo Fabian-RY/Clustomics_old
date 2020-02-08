@@ -4,9 +4,8 @@
 	   
  	<h1> {{project['project_name']}} </h1>
 <h2> New run </h2>
-<form action = {{url_for('new_run')}} method = "POST" enctype = "multipart/form-data">
-         <input type = "file" name = "file" />
-         <input type = "submit"/>
+<form action = {{url_for('new_run', user=username, project=project['project_name'])}} method = "POST" enctype = "multipart/form-data">
+         <input type = "file" name = "file" /><br />
      Select algorithm 
      <select name="algorithm">
         <option value="algorithm_1">K Means</option>
@@ -16,7 +15,7 @@
       Select number of groups: <input type="number" name="quantity" min="1">
       <br />
       Select linkage: 
-      <select>
+      <select name="type">
           <option value="ward"> Ward</option>
           <option value="single"> Single</option>
       </select>

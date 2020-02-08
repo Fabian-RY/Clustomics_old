@@ -16,8 +16,24 @@ connection = pymysql.connect(host='localhost',
                              cursorclass=pymysql.cursors.DictCursor)
     
 
-def get_info_from_project(name):
+def get_info_from_project(project_name):
+    sql = "SELECT * from projects WHERE project_name=%s"
+    print(project_name)
+    with connection.cursor() as cursor:
+        cursor.execute(sql, (project_name, ))
+        result = tuple(cursor)
+    return result
     pass
+
+def get_info_from_user(user):
+    pass
+
+def get_result_from_project(id_project):
+    sql = "SELECT * from project_result WHERE id_project=%s"
+    with connection.cursor() as cursor:
+        cursor.execute(sql, (id_project, ))
+        result = tuple(cursor)
+    return result
 
 def create_new_project(user, name, group):
     path = "%s_%s" % (name, group)
@@ -51,9 +67,9 @@ def get_groups_of_user(user):
 def get_group_info():
     pass
 
-def save_result():
+def save_result(user, output_file_path, score, ):
+    sql = ''
     with connection.cursor() as cursor:
-        sql = 'SELECT email FROM user_info where username=%s;'
         cursor.execute(sql, (user, ))
         result = tuple(cursor)
     return result
@@ -68,9 +84,18 @@ def get_user_result(datetime, user):
     pass
 
 def get_projects_from_user(user):
+    groups = get_groups_of_user(user)
+    print(groups)
+    member_of = list()
+    sql = 'SELECT * FROM projects WHERE user=%s'
+    for group in groups:
+        print(group)
+        member_of.append(group['group_name'])
+        sql += ' OR id_group=%s'
+    sql += ";"
+    print(sql)
     with connection.cursor() as cursor:
-        sql = 'SELECT * FROM projects WHERE user=%s;'
-        cursor.execute(sql, (user, ))
+        cursor.execute(sql, (user, *member_of, ))
         result = cursor.fetchall()
     return tuple(result)
 
