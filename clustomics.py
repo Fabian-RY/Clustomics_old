@@ -51,7 +51,7 @@ def new_project(user, name, group):
 
 @app.route('/<user>/<project>/results', methods=['POST','GET'])
 def run_results(id_project, datetime, user):
-    run = database.get_run_reults(id_project, datetime, user)
+    run = database.get_run_results(id_project, datetime, user)
     run=run[0]
     return flask.render_template('run.html', 
                                      project_name=run['project_name'], 
