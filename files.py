@@ -25,4 +25,4 @@ def random_input_files(variables_num, variable_names, registre_num, writer):
         writer.write("\n")
     writer.close()
 
-random_input_files(2, ["altura", "anchura"], 52, "projects/1f3a.csv")
+random_input_files(2, ["altura", "anchura"], 52, "projects/1tfd.csv")

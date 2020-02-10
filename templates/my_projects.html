@@ -3,7 +3,7 @@
    <body>
 	   
  	<h1> My projects </h1>
-	   <form action="/{{user}}/new_project">
+	   <form action="{{ url_for}}">
     	<input type="submit" value="Create new project" />
 		</form>
 	<table border=1>
@@ -11,7 +11,7 @@
 	<tr>
 
                <th> {{ project['project_name'] }} </th>
-               <td> {{ project['id_group'] }} </td>
+               <td> {{ project['group_name'] }} </td>
 	<td><form action={{ url_for("project_info", user=username, proj=project['project_name']) }}>
     	<input type="submit" value="Go to the project" />
 		</form></td>     

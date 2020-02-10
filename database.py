@@ -25,11 +25,20 @@ def get_info_from_project(project_name):
     return result
     pass
 
+def get_id_from_project(project, user):
+    sql = "SELECT id_project, group_name from projects WHERE project_name=%s AND user=%s"
+    with connection.cursor() as cursor:
+        cursor.execute(sql, (project, user))
+        result = tuple(cursor)
+    return result
+    pass
+    
+
 def get_info_from_user(user):
     pass
 
 def get_result_from_project(id_project):
-    sql = "SELECT * from project_result WHERE id_project=%s"
+    sql = "SELECT * from project_result WHERE project_name=%s"
     with connection.cursor() as cursor:
         cursor.execute(sql, (id_project, ))
         result = tuple(cursor)
@@ -38,7 +47,7 @@ def get_result_from_project(id_project):
 def create_new_project(user, name, group):
     path = "%s_%s" % (name, group)
     print(path)
-    sql = "INSERT INTO projects (project_name, user, id_group, file_path) VALUES ( %s, %s, %s, %s);"
+    sql = "INSERT INTO projects (project_name, user, group_name, file_path) VALUES ( %s, %s, %s, %s);"
     # If mirando si ese project name esta cogido ya para su user o su grupo
     with connection.cursor() as cursor:
         cursor.execute(sql, (name, user, group, path))
@@ -67,16 +76,22 @@ def get_groups_of_user(user):
 def get_group_info():
     pass
 
-def save_result(user, output_file_path, score, ):
-    sql = ''
+def save_result(id_, project, score, date_time, algorithm, groups,
+                 distance, linkage, group_name, user, path):
+    if (group_name is None): group_name = 'NULL'
+    sql = 'INSERT INTO project_result VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
     with connection.cursor() as cursor:
-        cursor.execute(sql, (user, ))
-        result = tuple(cursor)
-    return result
+        cursor.execute(sql, (id_, project, score, date_time, algorithm, groups, 
+                             distance, 
+                             linkage, 
+                             group_name, 
+                             user, 
+                             path ))
+    connection.commit()
     pass
 
-def get_user_result(datetime, user):
-    sql = "SELECT * FROM project_result where username=%s;"
+def get_user_result(datetime, user, projecy):
+    sql = "SELECT * FROM project_result where username=%s AND project;"
     with connection.cursor() as cursor:
         cursor.execute(sql, (user, ))
         result = tuple(cursor)
@@ -91,7 +106,7 @@ def get_projects_from_user(user):
     for group in groups:
         print(group)
         member_of.append(group['group_name'])
-        sql += ' OR id_group=%s'
+        sql += ' OR group_name=%s'
     sql += ";"
     print(sql)
     with connection.cursor() as cursor:
