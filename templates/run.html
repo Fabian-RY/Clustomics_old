@@ -4,6 +4,10 @@
       <title> RunID | {{project_name}} </title>
       <meta charset="UTF-8">
       <meta name="description" content="">
+<<<<<<< HEAD
+=======
+      <meta name="author" content="Conor Sheils">
+>>>>>>> 3589592bff185095762b617da8e70c1219433f10
     </head>
     <body>
       <nav>
@@ -11,6 +15,7 @@
         <a href="">MyProjects</a> |
         <a href="">This Project</a>
       </nav>
+<<<<<<< HEAD
       <h1> Run ID </h1> 
       Date: {{date}}
       <p> User: {{user_name}} </p>
@@ -20,10 +25,22 @@
       <p> Number of groups: {{number_of_groups}} </p>
       <p> Distance: {{distance}} </p>
       <p> Linkage: {{linkage}} </p>
+=======
+      <h1> Run ID </h1> {{date}}
+      <p>User: {{user_name}} </p>
+      <p>Group: {{group_name}} </p>
+      <p>Algorithm: {{algorithm}} </p>
+      <p>Validation parameter: {{validation_parameter}} </p>
+      <p>Number of clusters: {{number_of_groups}} </p>
+      <p>Distance type: {{distance}} </p>
+      <p>Linkage: {{linkage}} </p>
+      <h2> Table </h2>
+>>>>>>> 3589592bff185095762b617da8e70c1219433f10
       <table border=1>
         {% for datapoint in data %}
         <tr>
           <th> Datapoint ID/position </th>
+<<<<<<< HEAD
           <th> {{ run['validation_result'] }} </th>
       		<td> {{ run['user'] }} </td>
       		<td> {{ run['algorithm'] }} </td>
@@ -50,5 +67,14 @@
       {% endfor %}
       
       </table>
+=======
+          <th> Datapoint assigned Group </th>
+        </tr>
+          <td> {{ Datapoint ID }} </td>
+          <td> {{ Datapoint Group }} </td>
+        {% endfor %}
+      </table>
+      <img src={{img_route}} alt ="Results plot">
+>>>>>>> 3589592bff185095762b617da8e70c1219433f10
     </body>
   </html>
