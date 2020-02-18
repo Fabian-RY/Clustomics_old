@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Clustomics: settings</title>
+		
+	</head>
+	<body>
+		<p>Here you can change your email, password, and your groups. </p>
+	<form action="/settings" method = "POST">
+  	<label for="username">User name:</label><br>
+		<label for="password">Current password:</label><br>
+  	<input type="password" id="oldpassword" name="oldpassword" value= ><br><br>
+		<label for="password">New password:</label><br>
+  	<input type="password" id="newpassword" name="newpassword" value= ><br><br>
+  	<label for="email">Email:</label><br>
+  	<input type="text" id="email" name="email" value= {{email}}><br><br>
+  	<input type="submit" value="Submit">
+		
+	</form> 
+
+		
+      {% for group in groups %}
+        <form action= {{ url_for("delete", delete=group)}} method = "POST">
+          <tr>
+              <td>{{ group }}</td>
+              <td> <button type="submit" onclick=" ">Leave group.</button> </td>
+          </tr>
+        </form>    
+      {% endfor %}
+		
+	
+	
+	
+	
+	
+	
+	</body>
+
+
+
+
+</html>
