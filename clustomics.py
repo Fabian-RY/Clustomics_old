@@ -148,5 +148,9 @@ def signup():
 def about():
     return flask.render_template('about_us.html')
 
+@app.route('/<user>/settings')
+def settings():
+    return flask.render_template('settings.html')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=False)
