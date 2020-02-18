@@ -1,9 +1,17 @@
 from sklearn.cluster import AgglomerativeClustering
 from sklearn.metrics import silhouette_score
 from sklearn.decomposition import PCA
+from sklearn.impute import SimpleImputer
 import pandas as pd
 import plotly.express as px
 
+#IMPUTATION OF MISSING VALUES (missing values must be np.nan)
+pandas.options.mode.use_inf_as_na = True #infinite values are considered missing
+
+def impute_values(data):
+    imp = SimpleImputer(strategy = most_frequent)
+    imp.fit(data)
+    return pd.DataFrame(imp.transform(data))
 #Clustering
 
 def cluster(array, num_clusters, distance_type, linkage_type):
