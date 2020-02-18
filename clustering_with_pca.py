@@ -6,7 +6,9 @@ import plotly.express as px
 
 #Clustering
 
-def cluster(array, num_clusters, distance_type, linkage_type):
+def cluster(array, num_clusters, distance_type, linkage_type, categorical = False):
+    if categorical:
+        array = pd.get_dummies(array)
     algorithm = AgglomerativeClustering(
                                         linkage=linkage_type,
                                         n_clusters=num_clusters,
