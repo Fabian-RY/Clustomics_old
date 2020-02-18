@@ -27,14 +27,6 @@ def projects(user):
     response = flask.render_template('my_projects.html', projects=user_projects, username=user)
     return response
 
-@app.route('/<user>/settings')
-def settings(user):
-    user_info = database.get_info_from_user(user)
-    text = '<h1>Welcome, '+user+'</h1><br />'
-    #for project in user_projects:
-        #pass
-    return text
-
 def plot(list_info, list_group, path):
     data_numbers=pd.DataFrame(list_info)
     data_group=pd.DataFrame(list_group,columns=["grupo"])
@@ -121,20 +113,6 @@ def new_project(user, name, group):
     database.create_new_project(user, name, group)
     return flask.url_for('projects', user=user)
 
-
-@app.route('/<user>/<project>/results', methods=['POST','GET'])
-def run_results(id_project, datetime, user):
-    run = database.get_run_results(id_project, datetime, user)
-    run=run[0]
-    return flask.render_template('run.html', 
-                                     project_name=run['project_name'], 
-                                     algorithm=run['algo_rithm'],
-                                     user_name=run['user'],
-                                     group_name=run['group_name'],
-                                     validation_parameter=run['validation_result'],
-                                     number_of_groups=run['groups'],
-                                     distance=run['distance'],
-                                     linkage=run['linkage'])
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
