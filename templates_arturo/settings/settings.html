@@ -52,7 +52,9 @@
             </div>
             <div class="card-body">
               <h5 class="card-title text-center">Here you can change your email, password, and your groups.</h5>
-              <form class="form-signin">
+              
+              
+              <form action="/settings" method = "POST"  class="form-signin">
                 <div class="form-label-group">
                   <input type="text" id="inputUserame" class="form-control" placeholder="Username" required autofocus>
                   <label for="inputUserame">Username</label>
@@ -63,7 +65,7 @@
                 </div>
 
                 <div class="form-label-group">
-                  <input type="email" id="newEmail" class="form-control" placeholder="New email" >
+                  <input type="email" id="newEmail" class="form-control" placeholder="New email" value= {{email}} >
                   <label for="newEmail">New email</label>
                 </div>
 
@@ -91,8 +93,19 @@
         </div>
       </div>
     </div>
-  </body>
-</form> 
+ 
+
+
+{% for group in groups %}
+        <form action= {{ url_for("delete", delete=group)}} method = "POST">
+          <tr>
+              <td>{{ group }}</td>
+              <td> <button type="submit" onclick=" ">Leave group.</button> </td>
+          </tr>
+        </form>    
+{% endfor %}
+		
+
 
 <!-- Bootstrap core JavaScript -->
 <script src="../Home/vendor/jquery/jquery.min.js"></script>
@@ -100,6 +113,8 @@
 
 <!-- Plugin JavaScript -->
 <script src="../Home/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+
 
 </body>
 
@@ -117,12 +132,4 @@
 	
 	
 	
-	
-	
-	
-	</body>
-
-
-
-
-</html>
+	 
