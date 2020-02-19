@@ -1,28 +1,22 @@
 from sklearn.cluster import AgglomerativeClustering
 from sklearn.metrics import silhouette_score
 from sklearn.decomposition import PCA
-from sklearn.impute import SimpleImputer
 import pandas as pd
-import plotly.express as px
+import seaborn as sns
+import matplotlib.pyplot as plt
 
-#IMPUTATION OF MISSING VALUES (missing values must be np.nan)
-pandas.options.mode.use_inf_as_na = True #infinite values are considered missing
-
-def impute_values(data):
-    imp = SimpleImputer(strategy = most_frequent)
-    imp.fit(data)
-    return pd.DataFrame(imp.transform(data))
 #Clustering
 
-def cluster(array, num_clusters, distance_type, linkage_type):
-    array = pd.get_dummies(array)
+def cluster(array, num_clusters, distance_type, linkage_type, categorical = False):
+    if categorical:
+        array = pd.get_dummies(array)
     algorithm = AgglomerativeClustering(
                                         linkage=linkage_type,
                                         n_clusters=num_clusters,
                                         affinity=distance_type)
     algorithm.fit(array)
     validation = silhouette_score(array, algorithm.labels_, metric=distance_type)
-    return ([str(label) for label in algorithm.labels_], validation)
+    return (["Cluster "+str(label) for label in algorithm.labels_], validation)
 
 #pca
 def twodimensions(data, group_labels):
@@ -31,24 +25,13 @@ def twodimensions(data, group_labels):
     X_r = pca.fit(data).transform(data)
     pc1_values = [sample[0] for sample in X_r]
     pc2_values = [sample[1] for sample in X_r]
-    data = pd.DataFrame(data = {"pc1":pc1_values,"pc2":pc2_values, "Group":group_labels})
+    data = pd.DataFrame(data = {"PC1":pc1_values,"PC2":pc2_values, "Group":group_labels})
     return (data,pca.explained_variance_ratio_)
 #plotting
 def plotPCA(transformed_data):
-    fig = px.scatter(transformed_data[0], x = "pc1", y = "pc2", color = "Group")
-
-    fig.update_layout(
-        title="PCA",
-        xaxis_title="PC1 (%.3f)"%(transformed_data[1][0]),
-        yaxis_title="PC2 (%.3f)"%(transformed_data[1][1]),
-        font=dict(
-            family="Courier New, monospace",
-            size=18,
-            color="#7f7f7f"
-        )
-    )
-
-    fig.show()
+    sns.set(style="whitegrid")
+    sns.scatterplot(x="PC1", y="PC2", hue = "Group", data=transformed_data[0])
+    plt.show()
 
 #example
 if __name__ == "__main__":
